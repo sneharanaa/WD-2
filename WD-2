@@ -1,0 +1,429 @@
+<!--1. Find the total width of an element(including width , padding , and border) in jQuery-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            align-items: center;
+        }
+        #demo {
+            border: 3px solid;
+            height: 300px;
+            width: 300px;
+            align-items: center;
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">
+        <h1></h1>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            var width = $("#demo").outerWidth(true);
+            $("h1").text("Total width : " +width)
+        });
+    </script>
+</body>
+</html>
+
+<!--2. Restricts "number" -only input for textboxes including decimals points.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            align-items: center;
+        }
+        #num {
+            height: 60px;
+            width: 500px;
+            font-size: x-large;
+            border: 3px solid;
+            
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="num" placeholder="Enter the value : ">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#num").on('input' , function(){
+                var value = $("#num").val();
+                var number = value.replace(/[^0-9.]/g , ''); 
+                $("#num").val(number);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--3. Changes the button text using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #done {
+            height: 50px;
+            width: 200px;
+            border: 5px solid;
+            font-size: x-large;
+        }
+    </style>
+</head>
+<body>
+    <button id="done">Click Here!</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#done").click(function(){
+                $("#done").text("Hello Everyone");
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--4. Remove all css classes using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .css {
+            font-size: x-large;
+            color: blue;
+            border: 3px solid;
+            height: 40%;
+            width: 40%;
+            padding: 30px;
+            margin-left: 30%;
+        }
+        #add {
+            height: 50px;
+            width: 100px;
+            font-size: x-large;
+            margin-left: 30%;
+        }
+        #remove {
+            height: 50px;
+            width: 110px;
+            font-size: x-large;
+            margin-left: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p class="css">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Omnis at aliquam perspiciatis amet nobis sapiente, harum accusamus nihil exercitationem numquam illo, 
+        dolorem soluta excepturi inventore animi incidunt aliquid earum rem?</p>
+    </div>
+    <div>
+        <button id="add">Add</button>
+        <button id="remove">Remove</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#remove").click(function(){
+                $("p").removeClass('css');
+            });
+            $("#add").click(function(){
+                $("p").addClass('css');
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--5. Select value from JSON object using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        color: black;
+        border: 3px solid;
+        font-size : 10px ;  
+        background-color: rgb(25, 170, 161); 
+    }
+    td , th {
+        color: black;
+        border: 3px solid;
+        font-size : 20px ;  
+        background-color: rgb(43, 199, 216); 
+        padding: 30px;
+        text-align: center;
+    }
+    th {
+        color: black;
+    }
+</style>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>RollNO</th>
+                <th>Name</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON('student.json' , function(obj){
+                var student = "";
+                $.each(obj , function(key , value){
+                    student += '<tr>';
+                        student += '<td>' + value.RollNo + '</td>';
+                        student += '<td>' + value.Name + '</td>';
+                        student += '<td>' + value.Course + '</td>';
+                    student += '</tr>';
+                });
+                $("tbody").append(student) ;
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--6. Add the list elements within unorderedlist elements using jQiery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo {            
+            align-items: center;
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="demo">
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON('student.json' , function(obj){
+                var student = "";
+                $.each(obj , function(key , value){
+                    student += '<li>'+ value.Name + '</li>'
+                });
+                $("#demo").append(student);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--7. Delete all table rows except first one using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        margin-left: 35%;
+    }
+    table {
+        color: black;
+        border: 3px solid;
+        font-size : 10px ;  
+        background-color: rgb(24, 129, 160); 
+    }
+    td , th {
+        color: black;
+        border: 3px solid;
+        font-size : 20px ;  
+        background-color: rgb(24, 129, 160); 
+        padding: 30px;
+        text-align: center;
+    }
+    th {
+        color: black;
+    }
+    #remove {
+        background-color: rgb(24, 129, 160); 
+        height: 30px;
+        width: 100px;
+        margin-left: 15%;
+    }
+</style>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>RollNO</th>
+                <th>Name</th>
+                <th>Course</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table><br><br>
+    <button id="remove">Remove</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON('student.json' , function(obj){
+                var student = "";
+                $.each(obj , function(key , value){
+                    student += '<tr>';
+                        student += '<td>' + value.RollNo + '</td>';
+                        student += '<td>' + value.Name + '</td>';
+                        student += '<td>' + value.Course + '</td>';
+                    student += '</tr>';
+                });
+                $("tbody").append(student);
+                $("#remove").click(function(){
+                    $("tbody").text(" ") ;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--8. Get the selected value from the dropdown box using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #sel {
+            margin-left: 40%;
+            width: 120px;
+            height: 50px;
+            font-size: 20px;
+        }
+        #a1 {
+            margin-left: 40%;
+        }
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <select id="sel">
+            <option value="Select">Select</option>
+            <option value="Manager">Manager</option>
+            <option value="HR">HR</option>
+            <option value="IT">IT</option>
+            <option value="Accountant">Accountant</option>
+        </select>
+    </div>
+    <div id="added">
+        <h1 id="a1"></h1>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("select").change(function(){
+                var value = $("select").val();
+                $("h1").text(value);
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--9. Demonstrate speed parameter (duration) in slide-up and slide-down.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #demo {
+            border: 5px solid;
+            height: 40%;
+            width: 50%;
+            font-size: xx-large;
+            text-align: center  ;
+        }
+    </style>
+</head>
+<body>
+    <div id="demo">Hello!</div><br><br>
+    <button id="up">Up</button>
+    <button id="down">Down</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#up").click(function(){
+                $("#demo").slideUp();
+            });
+            $("#down").click(function(){
+                $("#demo").slideDown();
+            });
+        });
+    </script>
+</body>
+</html>
+
+<!--10. Hide and show student information on single button click using jQuery.-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #info {
+            border: 5px solid;
+            margin-left: 20%;
+            height: 60%;
+            width: 60%;
+            text-align: center;
+            font-size: x-large;
+        }
+        #done {
+            height: 50px;
+            width: 100px;
+            margin-left: 47%;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">
+        <h1>Emloyee Information</h1>
+        <h3 class="a">Name : Tejas Rana</h3>
+        <h3 class="a">ID : 202367</h3>
+        <h3 class="a">Mobile NO. : 8978675645</h3>
+        <h3 class="a">Department : Staff Manager</h3>
+        <h3 class="a">Age : 26</h3><br>
+    </div><br><br>
+        <button id="done">Click Here!</button>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function(){
+            $("#done").click(function(){
+                $(".a").toggle();
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+
+
